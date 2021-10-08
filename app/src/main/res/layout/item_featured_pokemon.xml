@@ -2,14 +2,51 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="4dp"
-    android:background="?attr/selectableItemBackground"
-    android:layout_margin="8dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
 
-    <!-- TODO UI: Create your pokemon layout! -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/card_recycler_margin">
+
+        <TextView
+            android:id="@+id/item_pokemon_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="#"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toTopOf="@+id/item_pokemon_name"
+            app:layout_constraintEnd_toStartOf="@+id/item_pokemon_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_pokemon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Placeholder Pokemon name..."
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_pokemon_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_pokemon_count" />
+
+        <ImageView
+            android:id="@+id/item_pokemon_image"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_baseline_photo_placeholder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

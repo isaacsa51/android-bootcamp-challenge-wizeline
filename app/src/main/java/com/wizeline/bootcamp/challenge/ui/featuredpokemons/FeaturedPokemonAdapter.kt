@@ -1,10 +1,13 @@
 package com.wizeline.bootcamp.challenge.ui.featuredpokemons
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.wizeline.bootcamp.challenge.R
 import com.wizeline.bootcamp.challenge.databinding.ItemFeaturedPokemonBinding
 import com.wizeline.bootcamp.challenge.domain.Pokemon
 
@@ -30,8 +33,16 @@ class FeaturedPokemonAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(pokemon: Pokemon) {
-            // TODO UI: Bind the Pokemon to your layout!
-            // Don't forget to set up the OnClickListener :)
+            binding.itemPokemonCount.text = pokemon.id.toString()
+            binding.itemPokemonName.text = pokemon.name
+
+            Glide.with(itemView.context).load(pokemon.spriteUrl)
+                .placeholder(R.drawable.ic_baseline_photo_placeholder)
+                .into(binding.itemPokemonImage)
+
+            itemView.setOnClickListener {
+                Log.i("onClick", "${pokemon.name} clicked!")
+            }
         }
     }
 
