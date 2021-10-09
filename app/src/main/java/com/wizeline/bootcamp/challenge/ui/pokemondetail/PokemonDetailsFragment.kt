@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.challenge.data.mock.PokemonDetails
 import com.wizeline.bootcamp.challenge.databinding.FragmentPokemonDetailsBinding
+import com.wizeline.bootcamp.challenge.ui.featuredpokemons.FeaturedPokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +34,6 @@ class PokemonDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val pokemonId = requireArguments().getLong("pokemon_id")
-        // TODO DESIGN PATTERNS: make your call to your view model here
     }
 
     // Tip: use this function to set up the data in the fragment views
@@ -52,8 +52,8 @@ class PokemonDetailsFragment : Fragment() {
             pokemonName.text = pokemonDetails.name.replaceFirstChar {
                 it.uppercaseChar()
             }.let { "Name: $it" }
-            pokemonHeight.text = "Height: ${pokemonDetails.height.toString()}"
-            pokemonWeight.text = "Weight: ${pokemonDetails.weight.toString()}"
+            pokemonHeight.text = "Height: ${pokemonDetails.height}"
+            pokemonWeight.text = "Weight: ${pokemonDetails.weight}"
 
             val abilitiesString = pokemonDetails.abilities.joinToString(
                 separator = ", ",

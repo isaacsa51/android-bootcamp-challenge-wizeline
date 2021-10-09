@@ -1,5 +1,13 @@
 package com.wizeline.bootcamp.challenge.data.services
 
+import com.wizeline.bootcamp.challenge.domain.models.Pokemon
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.HeaderMap
+import retrofit2.http.Path
+import java.util.*
+
 interface PokemonDetailsService {
-    // TODO NETWORKING: Define your method to the the 'pokemon/{id}' endpoint
+    @GET("pokemon/{id}")
+    fun getPokemon(@Path("id") pokemonId: Long?, @HeaderMap headers: Map<String, String> = Collections.emptyMap()): Call<Pokemon>
 }

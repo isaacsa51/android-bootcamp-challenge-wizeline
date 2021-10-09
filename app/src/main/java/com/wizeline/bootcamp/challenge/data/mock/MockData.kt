@@ -1,6 +1,6 @@
 package com.wizeline.bootcamp.challenge.data.mock
 
-import com.wizeline.bootcamp.challenge.domain.Pokemon
+import com.wizeline.bootcamp.challenge.domain.models.Pokemon
 
 val mockPokemons = listOf(
     Pokemon(id = 1L, name = "Bulbasaur", spriteUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"),

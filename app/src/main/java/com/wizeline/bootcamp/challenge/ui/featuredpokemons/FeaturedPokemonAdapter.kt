@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.challenge.R
 import com.wizeline.bootcamp.challenge.databinding.ItemFeaturedPokemonBinding
-import com.wizeline.bootcamp.challenge.domain.Pokemon
+import com.wizeline.bootcamp.challenge.domain.models.Pokemon
 
 typealias OnPokemonClicked = (Long) -> Unit
 
@@ -42,6 +42,7 @@ class FeaturedPokemonAdapter(
 
             itemView.setOnClickListener {
                 Log.i("onClick", "${pokemon.name} clicked!")
+                onPokemonClicked(pokemon.id)
             }
         }
     }

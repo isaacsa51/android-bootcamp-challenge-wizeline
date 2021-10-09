@@ -1,4 +1,4 @@
-package com.wizeline.bootcamp.challenge.domain
+package com.wizeline.bootcamp.challenge.domain.models
 
 data class Pokemon(
     val id: Long,
