@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mini PokeDex</string>
+    <string name="pokemon_details_error_message">Error al cargar la información del pokemon:(</string>
 </resources>

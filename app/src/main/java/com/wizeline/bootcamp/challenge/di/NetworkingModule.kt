@@ -1,7 +1,10 @@
 package com.wizeline.bootcamp.challenge.di
 
 import com.squareup.moshi.Moshi
+import com.wizeline.bootcamp.challenge.data.repo.PokemonDetailsRepo
 import com.wizeline.bootcamp.challenge.data.services.PokemonDetailsService
+import com.wizeline.bootcamp.challenge.domain.repositories.PokemonRepository
+import com.wizeline.bootcamp.challenge.domain.usecases.pokemon.GetPokemonUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,5 +43,11 @@ object NetworkingModule {
     @Singleton
     fun providePokemonService(retrofit: Retrofit): PokemonDetailsService {
         return retrofit.create(PokemonDetailsService::class.java)
+    }
+
+    @Provides
+    @RemoteGetPokemonUseCase
+    fun provideRemoteGetPokemonUseCase (pokemonDetailsService: PokemonDetailsService): GetPokemonUseCase {
+        return GetPokemonUseCase(PokemonDetailsRepo(pokemonDetailsService))
     }
 }

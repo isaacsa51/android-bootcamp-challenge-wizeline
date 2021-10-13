@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.wizeline.bootcamp.challenge.data.mock.PokemonDetails
 import com.wizeline.bootcamp.challenge.databinding.FragmentPokemonDetailsBinding
-import com.wizeline.bootcamp.challenge.ui.featuredpokemons.FeaturedPokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,10 +33,46 @@ class PokemonDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val pokemonId = requireArguments().getLong("pokemon_id")
+        val pokemonId = requireArguments().getLong(POKEMON_ID_EXTRA)
+
+        setupViewModel(pokemonId)
     }
 
-    // Tip: use this function to set up the data in the fragment views
+    private fun setupViewModel(pokemonId: Long){
+        viewModel.pokemonInfo.observe(viewLifecycleOwner, selectedPokemonInfo)
+        viewModel.error.observe(viewLifecycleOwner, checkPokemonInfo)
+
+        viewModel.initializeSearch(pokemonId)
+    }
+
+    private val selectedPokemonInfo = Observer<PokemonDetails> { pokemon ->
+        arrangePokemonDetails(pokemon)
+    }
+
+    private val checkPokemonInfo = Observer<Boolean> { error ->
+        if (error) {
+            binding.pokemonFrontSprite.visibility = View.GONE
+            binding.pokemonBackSprite.visibility = View.GONE
+            binding.guideline.visibility = View.GONE
+            binding.pokemonAbilities.visibility = View.GONE
+            binding.pokemonName.visibility = View.GONE
+            binding.pokemonWeight.visibility = View.GONE
+            binding.pokemonHeight.visibility = View.GONE
+
+            binding.pokemonAbilities.visibility = View.VISIBLE
+        } else {
+            binding.pokemonFrontSprite.visibility = View.VISIBLE
+            binding.pokemonBackSprite.visibility = View.VISIBLE
+            binding.guideline.visibility = View.VISIBLE
+            binding.pokemonAbilities.visibility = View.VISIBLE
+            binding.pokemonName.visibility = View.VISIBLE
+            binding.pokemonWeight.visibility = View.VISIBLE
+            binding.pokemonHeight.visibility = View.VISIBLE
+
+            binding.pokemonAbilities.visibility = View.GONE
+        }
+    }
+
     private fun arrangePokemonDetails(pokemonDetails: PokemonDetails) {
         Glide.with(requireContext())
             .load(pokemonDetails.sprites.frontDefault)
@@ -63,5 +99,9 @@ class PokemonDetailsFragment : Fragment() {
             }
             pokemonAbilities.text = abilitiesString
         }
+    }
+
+    companion object {
+        const val POKEMON_ID_EXTRA = "pokemon_id"
     }
 }
